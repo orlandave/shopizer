@@ -28,6 +28,13 @@ sm-shop/.project
 **/.classpath
 */sm-shop/src/main/resources/*
 sm-shop/src/main/resources/database.properties
-.DS_Store
+*.db
+*.icloud
+*.dat
+*.factorypath
+*.metadata/*
+*.mmdb
+
+/.metadata/
 
 .mvnw/*.jar
