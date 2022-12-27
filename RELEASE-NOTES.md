@@ -1,5 +1,11 @@
-Tag changes in version 2.16.0
+Changes in version 3.2.2
 
-Spring boot 2.3.6
+
+Functionality
+
+Api refactoring for products as documented https://shopizer-ecommerce.github.io/documentation/api/products/index.html
+Open Search in replacement of elastic search. This is a starter that can be added to sm-core/pom.xml
+
+
 
 

@@ -15,6 +15,7 @@ import javax.persistence.TableGenerator;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 
+import com.salesmanager.core.model.catalog.product.attribute.Optionable;
 import com.salesmanager.core.model.catalog.product.attribute.ProductOption;
 import com.salesmanager.core.model.catalog.product.attribute.ProductOptionValue;
 import com.salesmanager.core.model.common.audit.AuditListener;
@@ -37,7 +38,7 @@ import com.salesmanager.core.model.merchant.MerchantStore;
 @EntityListeners(value = AuditListener.class)
 @Table(name = "PRODUCT_VARIATION", uniqueConstraints=
 @UniqueConstraint(columnNames = {"MERCHANT_ID", "PRODUCT_OPTION_ID", "OPTION_VALUE_ID"}))
-public class ProductVariation extends SalesManagerEntity<Long, ProductVariation> implements Auditable {
+public class ProductVariation extends SalesManagerEntity<Long, ProductVariation> implements Optionable, Auditable {
 
 	/**
 	 * 
@@ -48,7 +49,7 @@ public class ProductVariation extends SalesManagerEntity<Long, ProductVariation>
 	private AuditSection auditSection = new AuditSection();
 	
 	@Id
-	@Column(name = "PRODUCT_VARIANTION_ID", unique=true, nullable=false)
+	@Column(name = "PRODUCT_VARIATION_ID", unique=true, nullable=false)
 	@TableGenerator(name = "TABLE_GEN", table = "SM_SEQUENCER", pkColumnName = "SEQ_NAME", valueColumnName = "SEQ_COUNT", pkColumnValue = "PRODUCT_VARIN_SEQ_NEXT_VAL")
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN")
 	private Long id;

@@ -21,7 +21,7 @@ import com.salesmanager.core.model.tax.taxclass.TaxClass;
 
 public interface ProductService extends SalesManagerEntityService<Long, Product> {
 
-	Optional<Product> retrieveById(Long id);
+	Optional<Product> retrieveById(Long id, MerchantStore store);
 
 	void addProductDescription(Product product, ProductDescription description) throws ServiceException;
 
@@ -34,6 +34,14 @@ public interface ProductService extends SalesManagerEntityService<Long, Product>
 	List<Product> getProducts(List<Long> categoryIds) throws ServiceException;
 
 	List<Product> getProductsByIds(List<Long> productIds) throws ServiceException;
+	
+	/**
+	 * The method to be used
+	 * @param product
+	 * @return
+	 * @throws ServiceException
+	 */
+	Product saveProduct(Product product) throws ServiceException;
 
 	/**
 	 * Get a product with only MerchantStore object
@@ -44,6 +52,8 @@ public interface ProductService extends SalesManagerEntityService<Long, Product>
 
 	ProductList listByStore(MerchantStore store, Language language,
 			ProductCriteria criteria);
+	
+	boolean exists(String sku, MerchantStore store);
 	
 	
 	/**
@@ -68,14 +78,12 @@ public interface ProductService extends SalesManagerEntityService<Long, Product>
 	Product getBySeUrl(MerchantStore store, String seUrl, Locale locale);
 
 	/**
-	 * Get a product by sku (code) field  and the language
+	 * Product and or product instance
 	 * @param productCode
-	 * @param language
+	 * @param merchant
 	 * @return
 	 */
-	Product getByCode(String productCode, Language language);
-	
-	Product getByCode(String productCode, MerchantStore merchant);
+	Product getBySku(String productCode, MerchantStore merchant, Language language) throws ServiceException;
 
 	/**
 	 * Find a product for a specific merchant

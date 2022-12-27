@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.core.business.services.catalog.product.PricingService;
+import com.salesmanager.core.business.services.catalog.pricing.PricingService;
 import com.salesmanager.core.model.catalog.product.availability.ProductAvailability;
 import com.salesmanager.core.model.catalog.product.price.ProductPrice;
 import com.salesmanager.core.model.merchant.MerchantStore;
@@ -83,6 +83,8 @@ public class ReadableInventoryMapper implements Mapper<ProductAvailability, Read
       
       List<ReadableProductPrice> prices = prices(source, store, language);
       destination.setPrices(prices);
+      
+      destination.setSku(source.getSku());
       
       //not necessary when getting an inventory
       //if(source.getProductInstance() != null) {

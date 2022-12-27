@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.salesmanager.core.business.exception.ServiceException;
-import com.salesmanager.core.business.services.catalog.product.PricingService;
+import com.salesmanager.core.business.services.catalog.pricing.PricingService;
 import com.salesmanager.core.business.services.catalog.product.ProductService;
 import com.salesmanager.core.business.services.catalog.product.relationship.ProductRelationshipService;
 import com.salesmanager.core.model.catalog.product.Product;
@@ -188,13 +188,12 @@ public class ProductItemsFacadeImpl implements ProductItemsFacade {
 	public ReadableProductList removeItemFromGroup(Product product, String group, MerchantStore store,
 			Language language) throws Exception {
 		
-		ProductRelationship relationship = null;
-		List<ProductRelationship> relationships = productRelationshipService.getByType(store, product, group);
+		List<ProductRelationship> relationships = productRelationshipService
+				.getByType(store, product, group);
+		
 
 		for(ProductRelationship r : relationships) {
-			if(r.getRelatedProduct().getId().longValue()==product.getId().longValue()) {
-				productRelationshipService.delete(relationship);
-			}
+			productRelationshipService.delete(r);
 		}
 
 		return listItemsByGroup(group,store,language);
